@@ -9,7 +9,7 @@ def load_data():
     # Use the column names identified in your file metadata
     columns = ['Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness', 
                'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age', 'Outcome']
-    df = pd.read_csv('dataset.csv', names=columns, skiprows=14) # skip metadata headers
+    df = pd.read_csv('dataset_', names=columns, skiprows=14) # skip metadata headers
     return df
 
 df = load_data()
