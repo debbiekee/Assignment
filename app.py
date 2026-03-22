@@ -4,15 +4,27 @@ from sklearn.ensemble import RandomForestClassifier
 
 # 1. Load the dataset
 # Ensure 'dataset.csv' is in the same folder in your GitHub repo
+# @st.cache_data
+# def load_data():
+#     # Use the column names identified in your file metadata
+#     columns = ['Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness', 
+#                'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age', 'Outcome']
+#     df = pd.read_csv('dataset_', names=columns, skiprows=14) # skip metadata headers
+#     return df
+
+# df = load_data()
+
 @st.cache_data
 def load_data():
-    # Use the column names identified in your file metadata
-    columns = ['Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness', 
-               'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age', 'Outcome']
-    df = pd.read_csv('dataset_', names=columns, skiprows=14) # skip metadata headers
+    # These names match the @ATTRIBUTE tags in your file 
+    columns = [
+        'Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness', 
+        'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age', 'Outcome'
+    ]
+    
+    # 'skiprows=38' jumps over the text and starts at the first line of numbers 
+    df = pd.read_csv('dataset.csv', names=columns, skiprows=38) 
     return df
-
-df = load_data()
 
 # 2. Build and Train the Model
 X = df.drop('Outcome', axis=1)
