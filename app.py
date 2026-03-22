@@ -26,6 +26,8 @@ def load_data():
     df = pd.read_csv('dataset.csv', names=columns, skiprows=38) 
     return df
 
+df = load_data()
+
 # 2. Build and Train the Model
 X = df.drop('Outcome', axis=1)
 y = df['Outcome']
