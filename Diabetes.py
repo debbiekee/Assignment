@@ -7,7 +7,7 @@ import joblib
 # Load Model & Files
 # ===============================
 # Change: Using joblib to load the SVM .pkl file instead of load_model
-model = joblib.load("diabetes_svm_model.pkl") 
+model = joblib.load("diabetes_swm_model.pkl") 
 scaler = joblib.load("scaler.pkl")
 feature_names = joblib.load("features.pkl")
 
