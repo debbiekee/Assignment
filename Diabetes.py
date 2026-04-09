@@ -2,16 +2,16 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import joblib
-from tensorflow.keras.models import load_model
 
 # ===============================
 # Load Model & Files
 # ===============================
-model = load_model("diabetes_ann_model.h5", compile=False)
+# Change: Using joblib to load the SVM .pkl file instead of load_model
+model = joblib.load("diabetes_svm_model.pkl") 
 scaler = joblib.load("scaler.pkl")
 feature_names = joblib.load("features.pkl")
 
-st.title("🧠 Diabetes Prediction App (ANN)")
+st.title("🧠 Diabetes Prediction App (SVM)")
 st.write("Enter patient details below:")
 
 # ===============================
@@ -91,7 +91,7 @@ def explain_prediction(input_data):
     return explanation
 
 # ===============================
-# Prediction
+# Prediction logic
 # ===============================
 if st.button("Predict"):
     input_data = create_features()
@@ -101,7 +101,9 @@ if st.button("Predict"):
 
     input_scaled = scaler.transform(input_df)
 
-    prediction = model.predict(input_scaled)[0][0]
+    # Change: Use predict_proba for SVM to get the confidence score (0 to 1)
+    # This requires the model to be trained with SVC(probability=True)
+    prediction = model.predict_proba(input_scaled)[0][1]
 
     # ===============================
     # Output
